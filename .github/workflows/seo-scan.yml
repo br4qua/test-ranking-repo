@@ -1,0 +1,26 @@
+name: SEO Scan
+
+on:
+  workflow_dispatch:
+    inputs:
+      pages:
+        description: 'Pages to scan (comma-separated or "all")'
+        default: "all"
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install @anthropic-ai/sdk
+
+      - name: Run SEO scan
+        run: node scripts/seo-scan.mjs --pages "${{ github.event.inputs.pages }}"
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
